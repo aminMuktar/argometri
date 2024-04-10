@@ -8,7 +8,6 @@ def main():
     parser.add_argument("-d","--domain",required=True,help="argocd base url")
     parser.add_argument("-u","--username",required=True,help="username for authentication")
     parser.add_argument("-p","--password",required=True,help="password for authentication")
-    
     args = parser.parse_args()
 
     if args.username and not args.password:

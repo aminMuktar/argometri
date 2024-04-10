@@ -1,7 +1,8 @@
 import requests
-
-
+import json
+import os
 requests.packages.urllib3.disable_warnings()
+from datetime import date
 
 
 class ArgoCDAuth:
@@ -30,10 +31,19 @@ class ArgoCDAuth:
                 "Authorization": f"Bearer {self.token}",
                 "Content-Type": "application/json",
                 }
+
     def list_applications(self):
         response = requests.get(f'{self.base_url}/api/v1/applications',headers=self.headers, verify=False)
+        current_date= date.today().isoformat()
+        folder_path=os.path.join("data",current_date)
+        if not os.path.exists(folder_path):
+            os.makedirs(folder_path)
+        file_path= os.path.join(folder_path,"argocd_apps.json")
         if response.status_code == 200:
-            return response.json()
+            data = response.json()
+            with open(file_path,"w") as file:
+                json.dump(data,file)
+            
         else:
             print(f"Request failed with status code {response.status_code}")
             return None
