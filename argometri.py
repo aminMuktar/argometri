@@ -5,9 +5,10 @@ from auth import auth
 
 def main():
     parser = argparse.ArgumentParser(description="Argometrics client")
-    parser.add_argument("-d","--domain",required=True,help="argocd base url")
-    parser.add_argument("-u","--username",required=True,help="username for authentication")
-    parser.add_argument("-p","--password",required=True,help="password for authentication")
+    parser.add_argument("-d","--domain",help="argocd base url")
+    parser.add_argument("-u","--username",help="username for authentication")
+    parser.add_argument("-p","--password",help="password for authentication")
+    # parser.add_argument('--weeks', nargs='?', type=int, help='Number of weeks back to count from (optional)')
     args = parser.parse_args()
 
     if args.username and not args.password:

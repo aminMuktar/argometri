@@ -1,8 +1,8 @@
 import requests
 import json
 import os
-requests.packages.urllib3.disable_warnings()
 from datetime import date
+requests.packages.urllib3.disable_warnings()
 
 
 class ArgoCDAuth:
