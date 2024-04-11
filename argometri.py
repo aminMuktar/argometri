@@ -8,7 +8,7 @@ def main():
     parser.add_argument("-d","--domain",help="argocd base url")
     parser.add_argument("-u","--username",help="username for authentication")
     parser.add_argument("-p","--password",help="password for authentication")
-    # parser.add_argument('--weeks', nargs='?', type=int, help='Number of weeks back to count from (optional)')
+    parser.add_argument('-w','--weeks', nargs='?', type=int, help='Number of weeks back to count from (optional)')
     args = parser.parse_args()
 
     if args.username and not args.password:
@@ -19,6 +19,7 @@ def main():
     else:
         client = auth.create_argocd_client(base_url=args.domain)
     print(client.list_applications())
+    print(client.weeks_back_from_current_date(args.weeks))
 
 if __name__ == "__main__":
     main()
